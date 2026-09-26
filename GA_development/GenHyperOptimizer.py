@@ -94,7 +94,7 @@ class GenHyperOptimizer:
 
         REDUCTION_POP = math.ceil(reduction_rate * max_pop)
 
-        if (REDUCTION_POP % 2 == 1):
+        if REDUCTION_POP % 2 == 1:
             REDUCTION_POP -= 1
 
         self._REDUCTION_POP = REDUCTION_POP
@@ -369,7 +369,7 @@ class GenHyperOptimizer:
             for i in range(self._MAX_GEN):
 
                 # Sorting the generation data
-                if (self._gen_count % 2 == 0):
+                if self._gen_count % 2 == 0:
                     currentGen = self._even_generation.copy()
                     self._even_generation.clear()
                     nextGen = self._odd_generation
@@ -385,8 +385,8 @@ class GenHyperOptimizer:
 
                 # Transferring the best individuals into the next generation
                 # In this elitism method, even the elitist individuals are open to mating
-                for i in range(1, self._ELITISM_POP + 1):
-                    nextGen.append((currentGen[-i][0:3]))  # Keeps the chromosome, the hyperparameter configuration and the fitness score. Removes the ranking and intermediate sum
+                for j in range(1, self._ELITISM_POP + 1):
+                    nextGen.append((currentGen[-j][0:3]))  # Keeps the chromosome, the hyperparameter configuration and the fitness score. Removes the ranking and intermediate sum
 
                 if not self._REDUCTION_POP == 0:
                     self._MAX_POP -= self._REDUCTION_POP
@@ -422,7 +422,7 @@ class GenHyperOptimizer:
                 ELITISM_POP = math.ceil(self._ELITISM_RATE * self._MAX_POP)
 
                 # If the number of individuals is odd, it reduces 1 to make it even
-                if (ELITISM_POP % 2 == 1):
+                if ELITISM_POP % 2 == 1:
                     ELITISM_POP -= 1
 
                 self._ELITISM_POP = 2 if ELITISM_POP == 0 else ELITISM_POP
