@@ -107,6 +107,8 @@ Other findings:
 
 **Bottom line:** if speed matters most, use Bayesian Search. If accuracy and robustness to messy/skewed data matter most, the GA is the stronger choice at the cost of significantly more compute time.
 
+**Note:** All searches were run with a single worker (`n_jobs=1`), so candidates were evaluated sequentially. Bayesian optimisation is theoretically sequential, since each new point depends on all previous results, although scikit-optimize's `BayesSearchCV` can evaluate batches of candidates (`n_points`) and parallelise cross-validation folds (`n_jobs`). However, a Genetic Algorithm can evaluate every individual in a generation independently, so on multi-core hardware its wall-clock time could fall substantially, typically at the cost of more total compute. Similar observations can also be made for Random Search as well. These statements were not tested here, but this could be an interesting study to extend this work.
+
 ## 6. Repository / Appendix structure
 
 ```
